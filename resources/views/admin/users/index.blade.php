@@ -4,6 +4,12 @@
 <h1 class="text-3xl font-bold">User's overview</h1>
 <br />
 
+@if (session('status'))
+<div class="min-w-full bg-blue-400 text-white p-4 mb-4 mt-4 rounded-md alert-box">
+    <p>{{ session('status') }}</p>
+</div>
+@endif
+
 <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
         <tr>

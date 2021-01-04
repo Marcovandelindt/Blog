@@ -67,4 +67,20 @@ class User extends Controller
 
         return redirect()->route('admin.users.edit', ['id' => $user->id])->with('status', 'User is successfully updated');
     }
+
+    /**
+     * Delete a user
+     * 
+     * @param int $id
+     * 
+     * @return RedirectResponse
+     */
+    public function delete($id): RedirectResponse 
+    {
+        $user = BlogUser::findOrFail($id);
+        
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('status', 'User deleted successfully');
+    }
 }
