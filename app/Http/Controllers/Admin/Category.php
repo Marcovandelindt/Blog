@@ -98,4 +98,20 @@ class Category extends Controller
 
         return redirect()->route('admin.categories.edit', ['id' => $category->id])->with('status', 'Category successfully edited');
     }
+
+    /**
+     * Delete a category
+     * 
+     * @param int $id
+     * 
+     * @return Illuminate\Http\RedirectResponse
+     */
+    public function delete($id): RedirectResponse 
+    {
+        $category = BlogCategory::findOrFail($id);
+
+        $category->delete();
+
+        return redirect()->route('admin.categories')->with('status', 'Category successfully deleted');
+    }
 }
