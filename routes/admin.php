@@ -10,6 +10,9 @@ Route::middleware(['admin'])->group(function () {
 
     # User Routes
     Route::get('/admin/users', [User::class, 'index'])->name('admin.users');
+
     Route::get('/admin/users/edit/{id}', [User::class, 'edit'])->name('admin.users.edit');
+    Route::post('/admin/users/edit/{id}', [User::class, 'update']);
+
     Route::get('/admin/users/delete/{id}', [User::class, 'delete'])->name('admin.users.delete');
 });
