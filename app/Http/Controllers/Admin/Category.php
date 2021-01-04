@@ -60,4 +60,42 @@ class Category extends Controller
 
         return redirect()->route('admin.categories')->with('status', 'Category successfully created');
     }
+
+    /**
+     * Show the edit view
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function edit(int $id): View 
+    {
+        $category = BlogCategory::findOrFail($id);
+
+        $data = [
+            'title'    => 'Edit ' . $category->name,
+            'category' => $category,
+        ];
+
+        return view('admin.categories.edit')->with($data);
+    }
+
+    /**
+     * Post the edit form
+     * 
+     * @param int $id
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return Illuminate\Http\RedirectResponse;
+     */
+    public function postEdit($id, Request $request) 
+    {
+        $category = BlogCategory::findOrFail($id);
+
+        $category->name = $request->name;
+
+        $category->save();
+
+        return redirect()->route('admin.categories.edit', ['id' => $category->id])->with('status', 'Category successfully edited');
+    }
 }
