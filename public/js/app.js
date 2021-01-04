@@ -21297,6 +21297,14 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+$(document).ready(function () {
+  if ($('.alert-box')[0]) {
+    setTimeout(function () {
+      $('.alert-box').fadeOut(500);
+    }, 5000);
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

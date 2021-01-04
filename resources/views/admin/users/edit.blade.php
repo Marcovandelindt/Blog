@@ -51,12 +51,4 @@
         </div>
     </div>
 </form>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        setTimeout(function () {
-            $('.alert-box').fadeOut(1000);
-        }, 5000);
-    });
-</script>
 @endsection

@@ -20,6 +20,7 @@ Route::middleware(['admin'])->group(function () {
     # Category Routes
     Route::get('/admin/categories', [Category::class, 'index'])->name('admin.categories');
     Route::get('/admin/categories/create', [Category::class, 'create'])->name('admin.categories.create');
+    Route::post('/admin/categories/create', [Category::class, 'store']);
     Route::get('/admin/categories/edit/{id}', [Category::class, 'edit'])->name('admin.categories.edit');
     Route::get('/admin/categories/delete/{id}', [Category::class, 'delete'])->name('admin.categories.delete');
 });

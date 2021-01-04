@@ -1,9 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1 class="text-3xl font-bold">Categories overview</h1>
+<div class="w-full">
+<span class="text-3xl font-bold w-full float-left">Categories overview</span>
+<a href="{{ route('admin.categories.create') }}" class="-mt-8 mb-4 float-right flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-m font-medium text-white bg-green-500 hover:bg-green-600"><i class="fas fa-plus-circle mr-2"></i>Create</a>
+</div>
 <br />
 
+
+@if (session('status'))
+<div class="min-w-full bg-blue-400 text-white p-4 mb-4 mt-4 rounded-md alert-box">
+    <p>{{ session('status') }}</p>
+</div>
+@endif
 
 <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
