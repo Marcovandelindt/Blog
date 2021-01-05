@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Admin\Category;
+use App\Http\Controllers\Admin\Post;
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [Dashboard::class, 'index'])->name('admin.dashboard');
@@ -24,4 +25,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/categories/edit/{id}', [Category::class, 'edit'])->name('admin.categories.edit');
     Route::post('/admin/categories/edit/{id}', [Category::class, 'postEdit']);
     Route::get('/admin/categories/delete/{id}', [Category::class, 'delete'])->name('admin.categories.delete');
+
+    # Post routes
+    Route::get('/admin/posts', [Post::class, 'index'])->name('admin.posts');
 });
