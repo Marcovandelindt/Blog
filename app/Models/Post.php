@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use App\Models\Category;
 
 class Post extends Model
 {
@@ -30,5 +31,13 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Get the categories that belong to the post
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_post');
     }
 }

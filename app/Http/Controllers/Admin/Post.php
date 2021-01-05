@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Post as BlogPost;
+use App\Models\Category;
 
 class Post extends Controller
 {
@@ -23,8 +24,8 @@ class Post extends Controller
         $posts = BlogPost::all();
 
         $data = [
-            'title' => 'Posts',
-            'posts' => $posts,
+            'title'      => 'Posts',
+            'posts'      => $posts,
         ];
 
         return view('admin.posts.index')->with($data);
@@ -37,8 +38,11 @@ class Post extends Controller
      */
     public function create(): View
     {
+        $categories = Category::all();
+
         $data = [
-            'title' => 'Create post'
+            'title'      => 'Create post',
+            'categories' => $categories,
         ];
 
         return view('admin.posts.create')->with($data);
@@ -61,7 +65,13 @@ class Post extends Controller
             $post->slug      = Str::slug($post->title);
             $post->author_id = Auth::user()->id;
 
-            $post->save();
+            if (!empty($request->categories)) {
+                $post->save();
+                $post->categories()->sync($request->categories);
+                $message = 'Post successfully edited';
+            } else {
+                $message = 'No category selected';
+            }
 
             return redirect()->route('admin.posts')->with('status', 'Post successfully created');
        }
@@ -78,9 +88,12 @@ class Post extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
+        $categories = Category::all();
+
         $data = [
             'title' => 'Edit ' . $post->title,
             'post'  => $post,
+            'categories' => $categories,
         ];
 
         return view('admin.posts.edit')->with($data);
@@ -104,9 +117,15 @@ class Post extends Controller
         $post->slug      = Str::slug($post->title);
         $post->author_id = Auth::user()->id;
 
-        $post->save();
+        if (!empty($request->categories)) {
+            $post->categories()->sync($request->categories);
+            $post->save();
+            $message = 'Post successfully edited';
+        } else {
+            $message = 'No category selected';
+        }
 
-        return redirect()->route('admin.posts.edit', ['id' => $post->id])->with('status', 'Post successfully edited');
+        return redirect()->route('admin.posts.edit', ['id' => $post->id])->with('status', $message);
     }
 
     /**

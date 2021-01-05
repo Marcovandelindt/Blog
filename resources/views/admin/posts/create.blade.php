@@ -36,6 +36,21 @@
             <label for="body" class="block text-base font-bold text-gray-700 mb-2">Body</label>
             <textarea name="body" id="body" class="ckeditor"></textarea>
         </div>
+         <div class="mt-4">
+            <div class="flex flex-col">
+                <p class="text-lg font-bold">Categories</p>
+                @if (!empty($categories))
+                    @foreach ($categories as $category)
+                    <label class="inline-flex items-center mt-3">
+                        <input type="checkbox" name="categories[]" class="form-checkbox h-5 w-5 text-gray-600" value="{{ $category->id }}">
+                        <span class="ml-2 text-gray-700">
+                            {{ $category->name }}
+                        </span>
+                    </label>
+                    @endforeach
+                @endif
+            </div>       
+        </div>
         <div>
             <button type="submit" class="inline-flex justify-center py-2 mt-5 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Save
