@@ -31,6 +31,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/posts/create', [Post::class, 'create'])->name('admin.posts.create');
     Route::post('/admin/posts/create', [Post::class, 'store']);
     Route::get('/admin/posts/edit/{id}', [Post::class, 'edit'])->name('admin.posts.edit');
-    Route::post('/admin/posts/edit/{id}', [Post::class, 'postEdit']);
+    Route::post('/admin/posts/edit/{id}', [Post::class, 'update']);
     Route::get('/admin/posts/delete/{id}', [Post::class, 'delete'])->name('admin.posts.delete');
 });

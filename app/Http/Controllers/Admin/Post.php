@@ -74,9 +74,16 @@ class Post extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function edit(): View 
+    public function edit($id): View 
     {
+        $post = BlogPost::findOrFail($id);
 
+        $data = [
+            'title' => 'Edit ' . $post->title,
+            'post'  => $post,
+        ];
+
+        return view('admin.posts.edit')->with($data);
     }
 
     /**
@@ -87,9 +94,19 @@ class Post extends Controller
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEdit($id, StorePostRequest $request): RedirectResponse 
+    public function update($id, Request $request): RedirectResponse 
     {
-        
+        $post = BlogPost::findOrFail($id);
+
+        $post->online    = $request->online;
+        $post->title     = $request->title;
+        $post->body      = $request->body;
+        $post->slug      = Str::slug($post->title);
+        $post->author_id = Auth::user()->id;
+
+        $post->save();
+
+        return redirect()->route('admin.posts.edit', ['id' => $post->id])->with('status', 'Post successfully edited');
     }
 
     /**
@@ -101,6 +118,10 @@ class Post extends Controller
      */
     public function delete($id): RedirectResponse 
     {
+        $post = BlogPost::findOrFail($id);
+        
+        $post->delete();
 
+        return redirect()->route('admin.users')->with('status', 'Post deleted successfully');
     }
 }
