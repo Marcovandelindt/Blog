@@ -28,10 +28,10 @@
                 <td class="px-6 py-4 whitespace-nowrap">{{ $post->title }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ $post->author->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <a href="{{ route('admin.categories.edit', ['id' => $post->id]) }}" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-m font-medium text-black bg-yellow-500 hover:bg-yellow-600"><i class="fas fa-pencil-alt mr-2"></i>Edit</a>
+                    <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-m font-medium text-black bg-yellow-500 hover:bg-yellow-600"><i class="fas fa-pencil-alt mr-2"></i>Edit</a>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <a href="{{ route('admin.categories.delete', ['id' => $post->id]) }}" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-m font-medium text-white bg-red-500 hover:bg-red-600"><i class="fas fa-trash mr-2"></i>Delete</a>
+                    <a href="{{ route('admin.posts.delete', ['id' => $post->id]) }}" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-m font-medium text-white bg-red-500 hover:bg-red-600"><i class="fas fa-trash mr-2"></i>Delete</a>
                 </td>
             </tr>
             @endforeach
